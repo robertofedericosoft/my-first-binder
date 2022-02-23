@@ -17,6 +17,10 @@ class User(BaseModel):
 def readRoot():
     return {"Hello": "World"}
 
+@app.get("/app")
+def read_main(request: Request):
+    return {"message": "Welcome", "root_path": request.scope.get("root_path")}
+
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
